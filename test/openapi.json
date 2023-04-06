@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SuperAging Server API",
+    "description": "API Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/test/hello": {
+      "get": {
+        "tags": [
+          "test-endpoint"
+        ],
+        "summary": "사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.",
+        "description": "사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.",
+        "operationId": "hello",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "사용자 이름",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "사용자에 대한 인사말",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserName"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test/hello2": {
+      "get": {
+        "tags": [
+          "test-endpoint"
+        ],
+        "summary": "사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.",
+        "description": "사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.",
+        "operationId": "hello_1",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "description": "사용자 인사말과 사용자명",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UserName"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "사용자명과 인사말",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserName"
+              },
+              "examples": {
+                "soonoh": {
+                  "description": "soonoh",
+                  "value": {
+                    "greeting": "Hello",
+                    "name": "Soonoh"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "사용자명과 인사말",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserName"
+                },
+                "examples": {
+                  "soonoh": {
+                    "description": "soonoh",
+                    "value": {
+                      "greeting": "Hello",
+                      "name": "Soonoh"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserName": {
+        "type": "object",
+        "properties": {
+          "greeting": {
+            "type": "string",
+            "description": "인사말"
+          },
+          "name": {
+            "type": "string",
+            "description": "이름"
+          }
+        },
+        "description": "사용자 이름과 인사말"
+      }
+    }
+  }
+}

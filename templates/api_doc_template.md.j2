@@ -1,0 +1,98 @@
+# {{ spec.info.title }}
+
+{{ spec.info.description }}
+
+## Base URL
+
+
+| URL | Description |
+|------|------|
+{% for server in spec.servers
+%}| {{ server.url }} | {{ server.description }} |
+{% endfor %}
+
+
+## Authentication
+
+{{ spec.components.security_schemes }}
+
+## APIs
+
+{% for path, methods in spec.paths.items() %}
+
+{% for method, operation in methods.items() %}
+### {{ method.upper() }} {{ path }}
+
+{{ operation.summary }}
+
+{% if operation.description and operation.description != operation.summary %}
+{{ operation.description }}
+{% endif %}
+
+{% if operation.parameters %}
+#### Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+{% for param in operation.parameters
+%}| {{ param.name }} | {{ param.schema.type }} | {{ param.required }} | {{ param.description }} |
+{% endfor %}
+{% endif %}
+
+{% if operation.request_body %}
+#### Request Body
+
+{% if 'application/json' in operation.request_body.content %}
+{{ operation.request_body.content['application/json'].schema | ref_to_link }}
+{% endif %}
+{% if '*/*' in operation.request_body.content %}
+{{ operation.request_body.content['*/*'].schema | ref_to_link  }}
+{% endif %}
+
+
+{% endif %}
+
+#### Responses
+
+{% for status_code, response in operation.responses.items() %}
+##### {{ status_code }}
+
+{% if response.description %}
+{{ response.description }}
+{% endif %}
+
+{% if 'application/json' in response.content %}
+{{ response.content['application/json'].schema | ref_to_link  }}
+{% include './example.md.j2' %}
+{% endif %}
+{% if '*/*' in response.content %}
+{{ response.content['*/*'].schema | ref_to_link  }}
+{% with root = response.content['*/*'] %}
+{% include "./example.md.j2" %}
+{% endwith %}
+{% endif %}
+
+
+
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+## Components
+
+{% if spec.components.schemas %}
+{% for schema_name, schema in spec.components.schemas.items() %}
+
+### {{ schema_name }}
+
+{% if schema.description %}
+{{ schema.description }}
+{% endif %}
+
+| Field | Type | Description |
+|-------|------|-------------|
+{% for property_name, property in schema.properties.items()
+%}| {{ property_name }} | {{ property.type }} | {% if property.description %}{{ property.description }}{% endif %} |
+{% endfor %}
+{% endfor %}
+{% endif %}
