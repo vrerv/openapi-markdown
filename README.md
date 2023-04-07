@@ -32,3 +32,12 @@ outputFile = "api_doc.md"
 to_markdown(apiFile, outputFile)
 ```
 
+## Deploy
+
+```
+python3 -m pip install --upgrade twine
+```
+
+```
+./pypi.sh
+```
