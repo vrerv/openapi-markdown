@@ -10,13 +10,25 @@ This is a Python script that generates API documentation from an OpenAPI specifi
 - openapi-core
 - Jinja2
 
-## Installation
+## Development
 
 `pip install -r requirement.txt`
 
-## Run
+install a project in editble mode
+`pip install -e ./`
 
-`python openapi_markdown.py`
+run tests - not unit tests
 
+`python tests/test.py`
 
+## Usage
+
+```python
+from openapi_markdown.generator import to_markdown
+
+apiFile = "./tests/openapi.json"
+outputFile = "api_doc.md"
+
+to_markdown(apiFile, outputFile)
+```
 
