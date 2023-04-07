@@ -13,9 +13,16 @@ def to_json(value):
 def ref_to_link(ref):
     if not ref:
         return ""
-    parts = ref['$ref'].split("/")
-    schema_name = parts[-1]
-    return f"[{schema_name}](#{schema_name.lower()})"
+    for key in ref.keys():
+        if key == '$ref':
+            parts = ref['$ref'].split("/")
+            schema_name = parts[-1]
+            return f"[{schema_name}](#{schema_name.lower()})"
+        elif key == 'type':
+            return f"""| type | ${ref[key]} |"""
+        else:
+            return 'Not implemented type}'
+
 
 
 def to_markdown(api_file, output_file):

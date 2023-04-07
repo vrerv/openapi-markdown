@@ -1,5 +1,6 @@
 **/api*.md
 .idea
 dist
+**/*.pyc
 
 

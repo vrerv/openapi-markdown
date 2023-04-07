@@ -3,7 +3,7 @@
   "info": {
     "title": "SuperAging Server API",
     "description": "API Documentation",
-    "version": "1.0.0"
+    "version": "0.0.1"
   },
   "servers": [
     {
@@ -37,7 +37,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserName"
+                  "type": "string"
                 }
               }
             }
