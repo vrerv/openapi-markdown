@@ -19,7 +19,7 @@ def ref_to_link(ref):
             schema_name = parts[-1]
             return f"[{schema_name}](#{schema_name.lower()})"
         elif key == 'type':
-            return f"""| type | ${ref[key]} |"""
+            return f"{ref[key]}"
         else:
             return 'Not implemented type}'
 
