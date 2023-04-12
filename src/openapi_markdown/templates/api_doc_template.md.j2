@@ -39,14 +39,14 @@
 {% endfor %}
 {% endif %}
 
-{% if operation.request_body %}
+{% if operation.requestBody %}
 #### Request Body
 
-{% if 'application/json' in operation.request_body.content %}
-{{ operation.request_body.content['application/json'].schema | ref_to_link }}
+{% if 'application/json' in operation.requestBody.content %}
+{{ operation.requestBody.content['application/json'].schema | ref_to_link }}
 {% endif %}
-{% if '*/*' in operation.request_body.content %}
-{{ operation.request_body.content['*/*'].schema | ref_to_link  }}
+{% if '*/*' in operation.requestBody.content %}
+{{ operation.requestBody.content['*/*'].schema | ref_to_link  }}
 {% endif %}
 
 
