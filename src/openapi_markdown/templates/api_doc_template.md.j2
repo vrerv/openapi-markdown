@@ -14,7 +14,9 @@
 
 ## Authentication
 
-{{ spec.components.security_schemes }}
+{% with root = spec.components %}
+{% include './security_scheme.md.j2' %}
+{% endwith %}
 
 ## APIs
 
@@ -63,7 +65,9 @@
 
 {% if 'application/json' in response.content %}
 {{ response.content['application/json'].schema | ref_to_link  }}
+{% with root = response.content['application/json'] %}
 {% include './example.md.j2' %}
+{% endwith %}
 {% endif %}
 {% if '*/*' in response.content %}
 {{ response.content['*/*'].schema | ref_to_link  }}

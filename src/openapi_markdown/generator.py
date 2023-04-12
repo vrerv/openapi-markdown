@@ -24,7 +24,6 @@ def ref_to_link(ref):
             return 'Not implemented type}'
 
 
-
 def to_markdown(api_file, output_file):
     # Load the OpenAPI 3.0 specification file in either JSON or YAML format
     with open(api_file) as f:
