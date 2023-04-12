@@ -1,11 +1,11 @@
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-requirements-txt"]
 build-backend = "hatchling.build"
 
 [project]
 name = "openapi-markdown"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
     { name="soonoh", email="soonoh.jung@vrerv.com" },
 ]
@@ -18,6 +18,10 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3 :: Only"
 ]
+dynamic = ["dependencies"]
+
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["requirements.txt"]
 
 [project.urls]
 "Homepage" = "https://github.com/vrerv/openapi-markdown"
