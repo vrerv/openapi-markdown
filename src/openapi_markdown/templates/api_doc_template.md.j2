@@ -93,10 +93,12 @@
 {{ schema.description }}
 {% endif %}
 
+{% if schema.properties %}
 | Field | Type | Description |
 |-------|------|-------------|
 {% for property_name, property in schema.properties.items()
 %}| {{ property_name }} | {{ property.type }} | {% if property.description %}{{ property.description }}{% endif %} |
 {% endfor %}
+{% endif %}
 {% endfor %}
 {% endif %}
