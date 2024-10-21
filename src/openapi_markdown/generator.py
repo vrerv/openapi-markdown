@@ -23,6 +23,19 @@ def ref_to_link(ref):
         else:
             return 'Not implemented type}'
 
+def ref_to_param(ref, spec_data):
+    if not ref:
+        return None
+    for key in ref.keys():
+        if key == '$ref':
+            parts = ref['$ref'].split("/")
+            schema_type = parts[-2]
+            schema_name = parts[-1]
+            if schema_type == "parameters":
+                # Find parameter in components and return the parameter object
+                param = spec_data.get("components", {}).get("parameters", {}).get(schema_name)
+                return param
+    return ref
 
 def to_markdown(api_file, output_file):
     # Load the OpenAPI 3.0 specification file in either JSON or YAML format
@@ -37,6 +50,6 @@ def to_markdown(api_file, output_file):
     env.filters['ref_to_link'] = ref_to_link
     env.filters['to_json'] = to_json
     template = env.get_template('api_doc_template.md.j2')
-    rendered_template = template.render(spec=spec)
+    rendered_template = template.render(spec=spec, ref_to_param=lambda ref: ref_to_param(ref, spec_data))
     with open(output_file, "w") as f:
         f.write(rendered_template)
