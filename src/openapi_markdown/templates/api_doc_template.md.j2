@@ -36,8 +36,9 @@
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-{% for param in operation.parameters
-%}| {{ param.name }} | {{ param.schema.type }} | {{ param.required }} | {{ param.description }} |
+{% for param in operation.parameters %}
+{%- set param_obj = ref_to_param(param)
+%}| {{ param_obj.name }} | {{ param_obj.schema.type }} | {{ param_obj.required }} | {{ param_obj.description }} |
 {% endfor %}
 {% endif %}
 
