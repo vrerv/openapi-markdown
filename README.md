@@ -32,6 +32,10 @@ outputFile = "api_doc.md"
 to_markdown(apiFile, outputFile)
 ```
 
+- If you want to use your own template, creates 'templates' directory and put [`api_doc_template.md.j2`](src/openapi_markdown/templates/api_doc_template.md.j2) file in it.
+- You can change templates directory by passing it as the 3rd argument of `to_markdown`.
+
+
 ## Deploy
 
 ```

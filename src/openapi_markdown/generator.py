@@ -40,14 +40,14 @@ def ref_to_param(ref, spec_data):
     return ref
 
 
-def to_markdown(api_file, output_file):
+def to_markdown(api_file, output_file, templates_dir='templates'):
     # Load the OpenAPI 3.0 specification file in either JSON or YAML format
     with open(api_file) as f:
         spec_data = json.load(f) if api_file.endswith(".json") else yaml.safe_load(f)
     spec = Spec.from_dict(spec_data)
     # Load the Jinja2 template file
-    if os.path.exists('templates'):
-        env = Environment(loader=FileSystemLoader('templates'))
+    if os.path.exists(templates_dir):
+        env = Environment(loader=FileSystemLoader(templates_dir))
     else:
         env = Environment(loader=PackageLoader('openapi_markdown', 'templates'))
     env.filters['ref_to_link'] = ref_to_link

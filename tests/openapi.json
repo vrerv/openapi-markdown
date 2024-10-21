@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "SuperAging Server API",
+    "title": "Test Server API",
     "description": "API Documentation",
     "version": "0.0.1"
   },
