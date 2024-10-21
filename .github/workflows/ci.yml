@@ -1,0 +1,50 @@
+name: Python Unit Tests
+
+# Trigger the workflow on push or pull request to the main branch
+on:
+  push:
+    branches:
+      - '**' # matches every branch
+
+jobs:
+  test:
+    # Define a matrix to run tests on both Ubuntu and Windows with multiple Python versions
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.9, 3.11]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          auto-update-conda: true
+          activate-environment: myenv
+          use-only-tar-bz2: true
+
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.conda/pkgs
+            ~/.cache/pip
+            # For Windows, GitHub Actions normalizes paths, so no need for OS-specific paths
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Run Unit Tests
+        run: |
+          pip install -e .
+          python -m unittest
