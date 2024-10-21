@@ -17,9 +17,9 @@ This is a Python script that generates API documentation from an OpenAPI specifi
 install a project in editble mode
 `pip install -e ./`
 
-run tests - not unit tests
+run tests
 
-`python tests/test.py`
+`python -m unittest`
 
 ## Usage
 
