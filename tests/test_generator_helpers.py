@@ -38,7 +38,6 @@ class TestGeneratorHelpers(unittest.TestCase):
         })
 
     def test_ref_to_schema_array(self):
-        # Sample OpenAPI spec data with schemas
         schema = {
             "schema": {
                 "type": "array",
@@ -60,5 +59,43 @@ class TestGeneratorHelpers(unittest.TestCase):
                     },
                     "$ref": "#/components/schemas/Pet"
                 }
+            }
+        })
+
+    def test_ref_to_schema_oneOf(self):
+        schema = {
+            "data": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/Pet"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Pet"
+                    },
+                ]
+            },
+        }
+
+        result = ref_to_schema(schema, self.spec_data)
+        self.assertEqual(result, {
+            "data": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "name": {"type": "string"},
+                            "age": {"type": "integer"}
+                        },
+                        "$ref": "#/components/schemas/Pet"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "name": {"type": "string"},
+                            "age": {"type": "integer"}
+                        },
+                        "$ref": "#/components/schemas/Pet"
+                    }
+                ]
             }
         })
