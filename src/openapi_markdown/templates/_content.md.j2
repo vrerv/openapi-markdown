@@ -3,9 +3,10 @@
 {% for content_type, item in content.items() -%}
 
 {% set schema = item.schema -%}
-{% include './_object_schema.md.j2' %}
 
 {{ schema | ref_to_link }}
+
+{% include './_object_schema.md.j2' %}
 
 {% with root = item -%}
 {% include './_example.md.j2' -%}
