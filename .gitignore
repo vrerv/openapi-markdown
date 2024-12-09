@@ -2,5 +2,4 @@
 .idea
 dist
 **/*.pyc
-
-
+**/*.testout.md

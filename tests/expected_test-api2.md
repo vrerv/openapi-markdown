@@ -27,13 +27,14 @@ Search for a value
 |------|------|----------|-------------|
 | value | string | False | Search for a value in field *value* |
 
-#### Responses
 
+#### Responses
 
 ##### 200
 
 
 OK
+
 
 
 
@@ -44,10 +45,13 @@ Nothing found
 
 
 
+
 ##### 251
 
 
 Invalid search
+
+
 
 
 ## Components

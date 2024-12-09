@@ -5,14 +5,16 @@ from openapi_markdown.generator import to_markdown
 
 TESTOUT_EXTENSION = '.testout.md'
 TESTDIR = './' if os.getcwd().endswith('tests') else 'tests/'
+KEEP_OUT_FILES = os.getenv('KEEP_OUT_FILES', 'false').lower() == 'true'
 
 
 class TestToMarkdown(unittest.TestCase):
 
     def tearDown(self):
-        for file in os.listdir(TESTDIR):
-            if file.endswith(TESTOUT_EXTENSION):
-                os.remove(TESTDIR + file)
+        if not KEEP_OUT_FILES:
+            for file in os.listdir(TESTDIR):
+                if file.endswith(TESTOUT_EXTENSION):
+                    os.remove(TESTDIR + file)
 
     def test_to_markdown(self):
         test_cases = [

@@ -33,12 +33,17 @@ API Documentation
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | id | integer | True | 예제사용자의 아이디 |
+
+
 #### Request Body
+
+
 
 [ExampleUserUpdateModel](#exampleuserupdatemodel)
 
-#### Responses
 
+
+#### Responses
 
 ##### 200
 
@@ -46,7 +51,12 @@ API Documentation
 OK
 
 
+
+
 [ExampleUserResponseModel](#exampleuserresponsemodel)
+
+
+
 ### DELETE /example/example-users/{id}
 
 예제사용자를 삭제한다.
@@ -59,13 +69,15 @@ OK
 |------|------|----------|-------------|
 | id | integer | True | 예제사용자의 아이디 |
 
-#### Responses
 
+#### Responses
 
 ##### 200
 
 
 OK
+
+
 
 
 ### GET /example/example-users/
@@ -82,8 +94,8 @@ List
 | size | integer |  | The size of the page to be returned |
 | sort | array |  | Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. |
 
-#### Responses
 
+#### Responses
 
 ##### 200
 
@@ -91,19 +103,29 @@ List
 OK
 
 
+
+
 [PageExampleUserResponseModel](#pageexampleuserresponsemodel)
+
+
+
 ### POST /example/example-users/
 
 Create new User
 
 
 
+
+
 #### Request Body
+
+
 
 [ExampleUserCreateModel](#exampleusercreatemodel)
 
-#### Responses
 
+
+#### Responses
 
 ##### 200
 
@@ -111,7 +133,12 @@ Create new User
 OK
 
 
+
+
 [ExampleUserResponseModel](#exampleuserresponsemodel)
+
+
+
 ### GET /example/example-users/test/hello
 
 사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.
@@ -124,8 +151,8 @@ OK
 |------|------|----------|-------------|
 | name | string | True | 사용자 이름 |
 
-#### Responses
 
+#### Responses
 
 ##### 200
 
@@ -133,7 +160,12 @@ OK
 사용자에 대한 인사말
 
 
+
+
 string
+
+
+
 ### GET /example/example-users/test/hello2
 
 사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.
@@ -145,20 +177,14 @@ string
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | userName | object | True | 사용자 인사말과 사용자명 |
+
+
 #### Request Body
 
-[UserName](#username)
-
-#### Responses
-
-
-##### default
-
-
-사용자명과 인사말
 
 
 [UserName](#username)
+
 
 Examples
 
@@ -174,6 +200,38 @@ soonoh
   "name": "Soonoh"
 }
 ```
+
+
+
+#### Responses
+
+##### default
+
+
+사용자명과 인사말
+
+
+
+
+[UserName](#username)
+
+
+Examples
+
+
+
+
+soonoh
+
+
+```json
+{
+  "greeting": "Hello",
+  "name": "Soonoh"
+}
+```
+
+
 
 ## Components
 

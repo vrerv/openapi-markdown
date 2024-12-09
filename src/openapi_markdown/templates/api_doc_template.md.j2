@@ -40,43 +40,29 @@
 {% set param_obj = ref_to_schema(param) -%}
 | {{ param_obj.name }} | {{ param_obj.schema.type }} | {{ param_obj.required }} | {{ param_obj.description }} |
 {% endfor -%}
-{% endif -%}
+{% endif %}
 
 {% if operation.requestBody -%}
 
 #### Request Body
 
-{% if 'application/json' in operation.requestBody.content -%}
-{{ operation.requestBody.content['application/json'].schema | ref_to_link }}
-{% endif -%}
-{% if '*/*' in operation.requestBody.content -%}
-{{ operation.requestBody.content['*/*'].schema | ref_to_link  }}
+{% set content = operation.requestBody.content -%}
+{% include './_content.md.j2' %}
+
 {% endif -%}
 
-{% endif %}
 #### Responses
 
-{% for status_code, response in operation.responses.items() %}
+{% for status_code, response in operation.responses.items() -%}
+
 ##### {{ status_code }}
 
 {% if response.description %}
 {{ response.description }}
 {% endif %}
 
-{% if 'application/json' in response.content -%}
-{{ response.content['application/json'].schema | ref_to_link  }}
-{% with root = response.content['application/json'] -%}
-{% include './_example.md.j2' -%}
-{% endwith -%}
-{% endif -%}
-{% if '*/*' in response.content -%}
-{{ response.content['*/*'].schema | ref_to_link  }}
-{% with root = response.content['*/*'] -%}
-{% include "./_example.md.j2" -%}
-{% endwith -%}
-{% endif -%}
-
-
+{% set content = response.content -%}
+{% include './_content.md.j2' %}
 
 {% endfor -%}
 {% endfor -%}
