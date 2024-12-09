@@ -26,12 +26,14 @@ def ref_to_link(ref):
 
 
 def ref_to_param(ref, spec_data):
-    warn('ref_to_param is deprecated. Use ref_to_schema directly.', DeprecationWarning, stacklevel=2)
+    warn('ref_to_param is deprecated. Use ref_to_schema directly.', DeprecationWarning,
+         stacklevel=2)
     return ref_to_schema(ref, spec_data)
 
 
 def ref_to_schema(schema, spec_data):
-    """Convert a schema reference to actual schema object, recursively resolving all nested references."""
+    """Convert a schema reference to actual schema object, recursively resolving all
+    nested references."""
     if isinstance(schema, dict):
         if '$ref' in schema:
             # Resolve the immediate reference
@@ -65,10 +67,10 @@ def to_markdown(api_file, output_file, templates_dir='templates'):
     env.filters['ref_to_param'] = ref_to_param
     env.filters['ref_to_schema'] = ref_to_schema
     template = env.get_template('api_doc_template.md.j2')
-    rendered_template = template.render(spec=spec,
-                                        ref_to_param=lambda ref: ref_to_param(ref,
-                                                                              spec_data),
-                                        ref_to_schema=lambda ref: ref_to_schema(ref,
-                                                                                   spec_data))
+    rendered_template = (
+        template.render(spec=spec,
+                        ref_to_param=lambda ref: ref_to_param(ref, spec_data),
+                        ref_to_schema=lambda ref: ref_to_schema(ref, spec_data))
+    )
     with open(output_file, "w") as f:
         f.write(rendered_template)
