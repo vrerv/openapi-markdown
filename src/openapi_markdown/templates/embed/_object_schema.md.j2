@@ -13,14 +13,14 @@
 {%- endmacro %}
 
 {% set schema = ref_to_schema(schema) %}
-### {{ schema_name }}
-
-{% if schema.description %}
-{{ schema.description }}
-{% endif %}
 
 {% if schema.properties -%}
 {% for property_name, property in schema.properties.items() %}
 {{ render_property(property_name, property) }}
 {%- endfor %}
-{%- endif %} 
+{%- endif %}
+{% if schema.get('items', {}) -%}
+{% for property_name, property in schema.get('items', {}).items() %}
+{{ render_property(property_name, property) }}
+{%- endfor %}
+{%- endif %}
