@@ -11,7 +11,11 @@ import os
               type=click.Path(exists=False, file_okay=False, dir_okay=True),
               default='templates',
               help='Custom templates directory path')
-def main(input_file, output_file, templates_dir):
+@click.option('--filter-paths', '-f',
+              type=click.STRING,
+              multiple=True,
+              help='Only generate apis that start with the given path, multiple paths are allowed')
+def main(input_file, output_file, templates_dir, filter_paths):
     """Convert OpenAPI spec to Markdown documentation.
 
     INPUT_FILE: Path to OpenAPI specification file (JSON or YAML)
@@ -22,7 +26,9 @@ def main(input_file, output_file, templates_dir):
         
     try:
         # Use default templates if templates_dir is not provided
-        to_markdown(input_file, output_file, templates_dir)
+        to_markdown(input_file, output_file, templates_dir, options = {
+            'filter_paths': filter_paths
+        })
         click.echo(f"Successfully generated markdown documentation at {output_file}")
     except Exception as e:
         raise e

@@ -11,7 +11,7 @@ This is a Python script that generates API documentation from an OpenAPI specifi
 You can use `openapi2markdown` command as follows:
 
 ```
-% openapi2markdown --help
+% openapi2markdown --help                
 Usage: openapi2markdown [OPTIONS] INPUT_FILE [OUTPUT_FILE]
 
   Convert OpenAPI spec to Markdown documentation.
@@ -22,6 +22,8 @@ Usage: openapi2markdown [OPTIONS] INPUT_FILE [OUTPUT_FILE]
 
 Options:
   -t, --templates-dir DIRECTORY  Custom templates directory path
+  -f, --filter-paths TEXT        Only generate apis that start with the given
+                                 path, multiple paths are allowed
 ```
 
 ### Library
@@ -31,8 +33,12 @@ from openapi_markdown.generator import to_markdown
 
 apiFile = "./tests/openapi.json"
 outputFile = "api_doc.md"
+templatesDir = "templates"
+options = {
+    'filter_paths': ['/client']
+}
 
-to_markdown(apiFile, outputFile)
+to_markdown(apiFile, outputFile, templates_dir, options)
 ```
 
 - If you want to use your own template, creates 'templates' directory and put [`api_doc_template.md.j2`](src/openapi_markdown/templates/api_doc_template.md.j2) file in it.

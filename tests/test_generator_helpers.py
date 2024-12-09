@@ -26,7 +26,6 @@ class TestGeneratorHelpers(unittest.TestCase):
         }
 
         result = ref_to_schema(schema, self.spec_data)
-        print(result)
         self.assertEqual(result, {
             "schema": {
                 "type": "object",
@@ -50,7 +49,6 @@ class TestGeneratorHelpers(unittest.TestCase):
         }
 
         result = ref_to_schema(schema, self.spec_data)
-        print(result)
         self.assertEqual(result, {
             "schema": {
                 "type": "array",
