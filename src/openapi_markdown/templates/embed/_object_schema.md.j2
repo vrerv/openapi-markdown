@@ -1,0 +1,26 @@
+{% macro render_property(name, prop, level=0) -%}
+{{ "    " * level }}* {{ name }} {% if prop.type == 'array' and prop.get('items', {}) %}(array of {{ prop.get('items', {}).get('type', '') }}){% elif prop.type == 'object' %}(object){% else %}({{ prop.type }}){% endif %}{% if prop.default is defined %} - {{ prop.default }}{% endif %}{% if prop.description %}: {{ prop.description }}{% endif %}
+{%- if prop.properties %}
+{%- for sub_name, sub_prop in prop.properties.items() %}
+{{ render_property(sub_name, sub_prop, level + 1) }}
+{%- endfor %}
+{%- endif %}
+{%- if prop.type == 'array' and prop.get('items', {}).get('properties') %}
+{%- for sub_name, sub_prop in prop.get('items', {}).get('properties', {}).items() %}
+{{ render_property(sub_name, sub_prop, level + 1) }}
+{%- endfor %}
+{%- endif %}
+{%- endmacro %}
+
+{% set schema = ref_to_schema(schema) %}
+### {{ schema_name }}
+
+{% if schema.description %}
+{{ schema.description }}
+{% endif %}
+
+{% if schema.properties -%}
+{% for property_name, property in schema.properties.items() %}
+{{ render_property(property_name, property) }}
+{%- endfor %}
+{%- endif %} 

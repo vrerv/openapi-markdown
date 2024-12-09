@@ -59,7 +59,7 @@ def to_markdown(api_file, output_file, templates_dir='templates'):
     if os.path.exists(templates_dir):
         env = Environment(loader=FileSystemLoader(templates_dir))
     else:
-        env = Environment(loader=PackageLoader('openapi_markdown', 'templates'))
+        env = Environment(loader=PackageLoader('openapi_markdown', templates_dir))
     env.filters['ref_to_link'] = ref_to_link
     env.filters['to_json'] = to_json
     env.filters['ref_to_param'] = ref_to_param

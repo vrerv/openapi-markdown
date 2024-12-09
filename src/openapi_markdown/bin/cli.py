@@ -8,7 +8,7 @@ import os
 @click.argument('input_file', type=click.Path(exists=True))
 @click.argument('output_file', type=click.Path(), required=False)
 @click.option('--templates-dir', '-t',
-              type=click.Path(exists=True, file_okay=False, dir_okay=True),
+              type=click.Path(exists=False, file_okay=False, dir_okay=True),
               help='Custom templates directory path')
 def main(input_file, output_file, templates_dir):
     """Convert OpenAPI spec to Markdown documentation.
