@@ -2,7 +2,7 @@
 
 {{ spec.info.description }}
 
-## Base URL
+# Base URL
 
 
 | URL | Description |
@@ -11,18 +11,18 @@
 | {{ server.url }} | {{ server.description }} |
 {% endfor %}
 
-## Authentication
+# Authentication
 
 {% with root = spec.components -%}
 {% include './_security_scheme.md.j2' -%}
 {% endwith -%}
 
-## APIs
+# APIs
 
 {% for path, methods in spec.paths.items() -%}
 
 {% for method, operation in methods.items() -%}
-### {{ method.upper() }} {{ path }}
+## {{ method.upper() }} {{ path }}
 
 {{ operation.summary }}
 
@@ -32,7 +32,7 @@
 
 {% if operation.parameters -%}
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
@@ -44,18 +44,18 @@
 
 {% if operation.requestBody -%}
 
-#### Request Body
+### Request Body
 
 {% set content = operation.requestBody.content -%}
 {% include './_content.md.j2' %}
 
 {% endif -%}
 
-#### Responses
+### Responses
 
 {% for status_code, response in operation.responses.items() -%}
 
-##### {{ status_code }}
+#### {{ status_code }}
 
 {% if response.description %}
 {{ response.description }}
@@ -68,12 +68,12 @@
 {% endfor -%}
 {% endfor -%}
 
-## Components
+# Components
 
 {% if spec.components.schemas -%}
 {% for schema_name, schema in spec.components.schemas.items() %}
 
-### {{ schema_name }}
+## {{ schema_name }}
 
 {% if schema.description %}
 {{ schema.description }}

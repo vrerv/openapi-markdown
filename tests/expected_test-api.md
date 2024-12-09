@@ -2,7 +2,7 @@
 
 API Documentation
 
-## Base URL
+# Base URL
 
 
 | URL | Description |
@@ -10,32 +10,32 @@ API Documentation
 | http://localhost:8080 | Generated server url |
 
 
-## Authentication
+# Authentication
 
 
 
-### Security Schemes
+## Security Schemes
 
 | Name              | Type              | Description              | Scheme              | Bearer Format             |
 |-------------------|-------------------|--------------------------|---------------------|---------------------------|
 || jwt | http |  | bearer | JWT |
 
-## APIs
+# APIs
 
-### PUT /example/example-users/{id}
+## PUT /example/example-users/{id}
 
 예제사용자를 업데이트한다.
 
 
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | id | integer | True | 예제사용자의 아이디 |
 
 
-#### Request Body
+### Request Body
 
 [ExampleUserUpdateModel](#exampleuserupdatemodel)
 
@@ -43,9 +43,9 @@ API Documentation
 
 
 
-#### Responses
+### Responses
 
-##### 200
+#### 200
 
 
 OK
@@ -57,22 +57,22 @@ OK
 
 
 
-### DELETE /example/example-users/{id}
+## DELETE /example/example-users/{id}
 
 예제사용자를 삭제한다.
 
 
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | id | integer | True | 예제사용자의 아이디 |
 
 
-#### Responses
+### Responses
 
-##### 200
+#### 200
 
 
 OK
@@ -80,13 +80,13 @@ OK
 
 
 
-### GET /example/example-users/
+## GET /example/example-users/
 
 List
 
 
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
@@ -95,9 +95,9 @@ List
 | sort | array |  | Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported. |
 
 
-#### Responses
+### Responses
 
-##### 200
+#### 200
 
 
 OK
@@ -109,7 +109,7 @@ OK
 
 
 
-### POST /example/example-users/
+## POST /example/example-users/
 
 Create new User
 
@@ -117,7 +117,7 @@ Create new User
 
 
 
-#### Request Body
+### Request Body
 
 [ExampleUserCreateModel](#exampleusercreatemodel)
 
@@ -125,9 +125,9 @@ Create new User
 
 
 
-#### Responses
+### Responses
 
-##### 200
+#### 200
 
 
 OK
@@ -139,22 +139,22 @@ OK
 
 
 
-### GET /example/example-users/test/hello
+## GET /example/example-users/test/hello
 
 사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.
 
 
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | name | string | True | 사용자 이름 |
 
 
-#### Responses
+### Responses
 
-##### 200
+#### 200
 
 
 사용자에 대한 인사말
@@ -166,20 +166,20 @@ string
 
 
 
-### GET /example/example-users/test/hello2
+## GET /example/example-users/test/hello2
 
 사용자 이름을 받아 사용자에 대한 인사말을 리턴한다.
 
 
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | userName | object | True | 사용자 인사말과 사용자명 |
 
 
-#### Request Body
+### Request Body
 
 [UserName](#username)
 
@@ -203,9 +203,9 @@ soonoh
 
 
 
-#### Responses
+### Responses
 
-##### default
+#### default
 
 
 사용자명과 인사말
@@ -233,11 +233,11 @@ soonoh
 
 
 
-## Components
+# Components
 
 
 
-### ExampleUserUpdateModel
+## ExampleUserUpdateModel
 
 
 예제사용자 업데이트 요청
@@ -248,7 +248,7 @@ soonoh
 | name | string | 업데이트할 사용자 이름 |
 
 
-### ExampleUserContactModel
+## ExampleUserContactModel
 
 
 
@@ -259,7 +259,7 @@ soonoh
 | value | string |  |
 
 
-### ExampleUserResponseModel
+## ExampleUserResponseModel
 
 
 예제사용자 응답 모델
@@ -272,7 +272,7 @@ soonoh
 | contacts | array |  |
 
 
-### ExampleUserCreateModel
+## ExampleUserCreateModel
 
 
 예제사용자 생성 요청
@@ -284,7 +284,7 @@ soonoh
 | contacts | array |  |
 
 
-### UserName
+## UserName
 
 
 사용자 이름과 인사말
@@ -296,7 +296,7 @@ soonoh
 | name | string | 이름 |
 
 
-### PageExampleUserResponseModel
+## PageExampleUserResponseModel
 
 
 
@@ -315,7 +315,7 @@ soonoh
 | empty | boolean |  |
 
 
-### PageableObject
+## PageableObject
 
 
 
@@ -329,7 +329,7 @@ soonoh
 | pageSize | integer |  |
 
 
-### SortObject
+## SortObject
 
 
 

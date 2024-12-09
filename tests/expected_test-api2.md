@@ -2,7 +2,7 @@
 
 description
 
-## Base URL
+# Base URL
 
 
 | URL | Description |
@@ -10,27 +10,27 @@ description
 | /api |  |
 
 
-## Authentication
+# Authentication
 
 
-## APIs
+# APIs
 
-### GET /value/search
+## GET /value/search
 
 Search for a value
 
 
 
-#### Parameters
+### Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | value | string | False | Search for a value in field *value* |
 
 
-#### Responses
+### Responses
 
-##### 200
+#### 200
 
 
 OK
@@ -38,7 +38,7 @@ OK
 
 
 
-##### 250
+#### 250
 
 
 Nothing found
@@ -46,7 +46,7 @@ Nothing found
 
 
 
-##### 251
+#### 251
 
 
 Invalid search
@@ -54,5 +54,5 @@ Invalid search
 
 
 
-## Components
+# Components
 
