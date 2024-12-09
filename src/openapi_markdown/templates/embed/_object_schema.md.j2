@@ -12,15 +12,14 @@
 {%- endif %}
 {%- endmacro %}
 
-{% set schema = ref_to_schema(schema) %}
+{% set schema = ref_to_schema(schema) -%}
 
 {% if schema.properties -%}
 {% for property_name, property in schema.properties.items() %}
 {{ render_property(property_name, property) }}
 {%- endfor %}
 {%- endif %}
+
 {% if schema.get('items', {}) -%}
-{% for property_name, property in schema.get('items', {}).items() %}
-{{ render_property(property_name, property) }}
-{%- endfor %}
+{{ render_property(schema.type, schema) }}
 {%- endif %}
