@@ -14,15 +14,13 @@ def to_json(value):
 def ref_to_link(ref):
     if not ref:
         return ""
-    for key in ref.keys():
-        if key == '$ref':
-            parts = ref['$ref'].split("/")
-            schema_name = parts[-1]
-            return f"[{schema_name}](#{schema_name.lower()})"
-        elif key == 'type':
-            return f"{ref[key]}"
-        else:
-            return 'Not implemented type}'
+    if ref.get('$ref'):
+        parts = ref['$ref'].split("/")
+        schema_name = parts[-1]
+        return f"[{schema_name}](#{schema_name.lower()})"
+    elif ref.get('type'):
+        return f"{ref['type']}"
+    return ""
 
 
 def ref_to_param(ref, spec_data):
