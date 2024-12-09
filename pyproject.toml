@@ -26,3 +26,6 @@ files = ["requirements.txt"]
 [project.urls]
 "Homepage" = "https://github.com/vrerv/openapi-markdown"
 "Bug Tracker" = "https://github.com/vrerv/openapi-markdown/issues"
+
+[project.scripts]
+openapi2markdown = "openapi_markdown.bin.cli:main"
