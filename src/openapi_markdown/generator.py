@@ -31,16 +31,17 @@ def ref_to_param(ref, spec_data):
 
 def ref_to_schema(schema, spec_data):
     """Convert a schema reference to actual schema object, recursively resolving all
-    nested references."""
+    nested references while preserving $ref."""
     if isinstance(schema, dict):
         if '$ref' in schema:
-            # Resolve the immediate reference
+            # Get the referenced schema
             ref_path = schema['$ref'].split('/')
             current = spec_data
             for part in ref_path[1:]:  # Skip the first '#' element
                 current = current[part]
-            # Recursively resolve any nested references
-            return ref_to_schema(current, spec_data)
+            # Merge the referenced schema with the original, keeping $ref
+            resolved = ref_to_schema(current, spec_data)
+            return {**resolved, **schema}
         else:
             # Process all dictionary values recursively
             return {k: ref_to_schema(v, spec_data) for k, v in schema.items()}
