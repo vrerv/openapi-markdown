@@ -14,7 +14,7 @@
 ## Authentication
 
 {% with root = spec.components -%}
-{% include './security_scheme.md.j2' -%}
+{% include './_security_scheme.md.j2' -%}
 {% endwith -%}
 
 ## APIs
@@ -66,13 +66,13 @@
 {% if 'application/json' in response.content -%}
 {{ response.content['application/json'].schema | ref_to_link  }}
 {% with root = response.content['application/json'] -%}
-{% include './example.md.j2' -%}
+{% include './_example.md.j2' -%}
 {% endwith -%}
 {% endif -%}
 {% if '*/*' in response.content -%}
 {{ response.content['*/*'].schema | ref_to_link  }}
 {% with root = response.content['*/*'] -%}
-{% include "./example.md.j2" -%}
+{% include "./_example.md.j2" -%}
 {% endwith -%}
 {% endif -%}
 
@@ -93,7 +93,7 @@
 {{ schema.description }}
 {% endif %}
 
-{% include './object_schema.md.j2' -%}
+{% include './_object_schema.md.j2' -%}
 {% endfor -%}
 
 {% endif -%}
