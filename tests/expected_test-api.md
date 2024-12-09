@@ -144,7 +144,7 @@ string
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| userName |  | True | 사용자 인사말과 사용자명 |
+| userName | object | True | 사용자 인사말과 사용자명 |
 #### Request Body
 
 [UserName](#username)

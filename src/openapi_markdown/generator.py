@@ -4,6 +4,7 @@ import os
 import yaml
 from jinja2 import Environment, FileSystemLoader, PackageLoader
 from openapi_core import Spec
+from warnings import warn
 
 
 def to_json(value):
@@ -25,19 +26,28 @@ def ref_to_link(ref):
 
 
 def ref_to_param(ref, spec_data):
-    if not ref:
-        return None
-    for key in ref.keys():
-        if key == '$ref':
-            parts = ref['$ref'].split("/")
-            schema_type = parts[-2]
-            schema_name = parts[-1]
-            if schema_type == "parameters":
-                # Find parameter in components and return the parameter object
-                param = spec_data.get("components", {}).get("parameters", {}).get(
-                    schema_name)
-                return param
-    return ref
+    warn('ref_to_param is deprecated. Use ref_to_schema directly.', DeprecationWarning, stacklevel=2)
+    return ref_to_schema(ref, spec_data)
+
+
+def ref_to_schema(schema, spec_data):
+    """Convert a schema reference to actual schema object, recursively resolving all nested references."""
+    if isinstance(schema, dict):
+        if '$ref' in schema:
+            # Resolve the immediate reference
+            ref_path = schema['$ref'].split('/')
+            current = spec_data
+            for part in ref_path[1:]:  # Skip the first '#' element
+                current = current[part]
+            # Recursively resolve any nested references
+            return ref_to_schema(current, spec_data)
+        else:
+            # Process all dictionary values recursively
+            return {k: ref_to_schema(v, spec_data) for k, v in schema.items()}
+    elif isinstance(schema, list):
+        # Process all list items recursively
+        return [ref_to_schema(item, spec_data) for item in schema]
+    return schema
 
 
 def to_markdown(api_file, output_file, templates_dir='templates'):
@@ -52,9 +62,13 @@ def to_markdown(api_file, output_file, templates_dir='templates'):
         env = Environment(loader=PackageLoader('openapi_markdown', 'templates'))
     env.filters['ref_to_link'] = ref_to_link
     env.filters['to_json'] = to_json
+    env.filters['ref_to_param'] = ref_to_param
+    env.filters['ref_to_schema'] = ref_to_schema
     template = env.get_template('api_doc_template.md.j2')
     rendered_template = template.render(spec=spec,
                                         ref_to_param=lambda ref: ref_to_param(ref,
-                                                                              spec_data))
+                                                                              spec_data),
+                                        ref_to_schema=lambda ref: ref_to_schema(ref,
+                                                                                   spec_data))
     with open(output_file, "w") as f:
         f.write(rendered_template)
