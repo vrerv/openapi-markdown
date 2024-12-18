@@ -18,7 +18,7 @@ API Documentation
 
 | Name              | Type              | Description              | Scheme              | Bearer Format             |
 |-------------------|-------------------|--------------------------|---------------------|---------------------------|
-|| jwt | http |  | bearer | JWT |
+| jwt | http |  | bearer | JWT |
 
 # APIs
 

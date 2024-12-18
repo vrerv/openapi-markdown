@@ -4,7 +4,7 @@
 
 | Name              | Type              | Description              | Scheme              | Bearer Format             |
 |-------------------|-------------------|--------------------------|---------------------|---------------------------|
-|{% for scheme_name, scheme in root.securitySchemes.items() -%}
+{% for scheme_name, scheme in root.securitySchemes.items() -%}
 | {{ scheme_name }} | {{ scheme.type }} | {{ scheme.description }} | {{ scheme.scheme }} | {{ scheme.bearerFormat }} |
 {% endfor %}
 {% endif %}
