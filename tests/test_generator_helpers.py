@@ -99,3 +99,26 @@ class TestGeneratorHelpers(unittest.TestCase):
                 ]
             }
         })
+
+    def test_ref_to_schema_additionalProperties(self):
+        schema = {
+            "data": {
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/Pet"
+                }
+            },
+        }
+
+        result = ref_to_schema(schema, self.spec_data)
+        self.assertEqual(result, {
+            "data": {
+                "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                        "name": {"type": "string"},
+                        "age": {"type": "integer"}
+                    },
+                    "$ref": "#/components/schemas/Pet"
+                }
+            }
+        })

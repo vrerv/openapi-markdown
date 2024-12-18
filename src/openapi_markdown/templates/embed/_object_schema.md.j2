@@ -23,6 +23,9 @@
 {{ render_property("anyOf " + sub_prop.get('$ref', '').split('/')[-1], sub_prop, level + 1) }}
 {%- endfor %}
 {%- endif %}
+{%- if prop.additionalProperties %}
+{{ render_property("add " + prop.additionalProperties.get('$ref', '').split('/')[-1], prop.additionalProperties, level + 1) }}
+{%- endif %}
 
 {%- if prop.properties %}
 {%- for sub_name, sub_prop in prop.properties.items() %}
