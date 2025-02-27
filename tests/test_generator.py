@@ -20,7 +20,7 @@ class TestToMarkdown(unittest.TestCase):
         test_cases = [
             ("test-api.json", "expected_test-api.md"),
             ("test-api2.yaml", "expected_test-api2.md"),
-            ("test-api2-no-components.yaml", "expected_test-api2-no-components.md")
+            ("test-api-no-components.json", "expected_test-api-no-components.md")
         ]
 
         for api_file, expected_output_file in test_cases:

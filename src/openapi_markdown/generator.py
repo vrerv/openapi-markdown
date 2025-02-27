@@ -55,7 +55,6 @@ def to_markdown(api_file, output_file, templates_dir='templates', options={}):
     # Load the OpenAPI 3.0 specification file in either JSON or YAML format
     with open(api_file) as f:
         spec_data = json.load(f) if api_file.endswith(".json") else yaml.safe_load(f)
-    print("spec", spec_data, options)
     # Resolve all references in the spec data
     # spec_data = ref_to_schema(spec_data, spec_data)
     # filter spec_data.paths if filter_paths option is provided
