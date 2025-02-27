@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Test Server API",
+    "description": "API Documentation",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/example/example-users/{id}": {
+      "delete": {
+        "tags": [
+          "example-user-endpoint"
+        ],
+        "summary": "예제사용자를 삭제한다.",
+        "description": "예제사용자를 삭제한다.",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "예제사용자의 아이디",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": []
+      }
+    }
+  }
+}

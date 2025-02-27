@@ -11,11 +11,14 @@
 | {{ server.url }} | {{ server.description }} |
 {% endfor %}
 
+{% if spec.components and spec.components.securitySchemes -%}
+
 # Authentication
 
 {% with root = spec.components -%}
 {% include './_security_scheme.md.j2' -%}
 {% endwith -%}
+{% endif -%}
 
 # APIs
 
@@ -68,9 +71,10 @@
 {% endfor -%}
 {% endfor -%}
 
+{% if spec.components and spec.components.schemas -%}
+
 # Components
 
-{% if spec.components.schemas -%}
 {% for schema_name, schema in spec.components.schemas.items() %}
 
 ## {{ schema_name }}
